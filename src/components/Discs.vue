@@ -1,6 +1,11 @@
 <template>
   <section>
-      <div v-if="loading"> Loading... </div>
+      <div v-if="loading" id="loading"> 
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+      </div>
       <div v-else id="container">
         <Disk v-for="disk, i in discs.response" :key="i" :details="disk"/>
       </div>
@@ -45,11 +50,56 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
-section{
+#loading{
     text-align: center;
-    color: #fff;
-    font-size: 4rem;
+    padding-top: 4rem;
+
+    // new animated loader 
+    display: block;
+
+    span{
+        display: inline-block;
+        margin-top: 10px;
+        height: 20px;
+        width: 20px;
+        border-radius: 50%;
+        animation: move 1s ease-in-out infinite alternate;
+
+        &:not(:first-child){
+            margin-left: 10px;
+        }    
+    }
+
+    span:first-child{
+        background-color: #4285f4;
+        animation-delay: .2s;
+    }
+    span:nth-child(2){
+        background-color: #db4437;
+        animation-delay: .4s;
+    }
+    span:nth-child(3){
+        background-color: #f4b400;
+        animation-delay: .6s;
+    }
+    span:nth-child(4){
+        background-color: #0f9d58;
+        animation-delay: .8s;
+    }
 }
+
+@keyframes move {
+    to {
+        transform: translateY(5px);
+    }
+    from {
+        transform: translateY(-10px);
+    }
+
+}
+
+
+
 #container{
     display: flex;
     flex-wrap: wrap;
