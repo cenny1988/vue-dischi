@@ -29,7 +29,6 @@ export default {
 #app {
   main{
     background-color: #1e2d3b;
-    // debug
     min-height: 400px;
   }
   

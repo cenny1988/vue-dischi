@@ -1,6 +1,9 @@
 <template>
-  <section class="container">
-      <Disk v-for="disk, i in discs.response" :key="i" :details="disk"/>
+  <section>
+      <div v-if="loading"> Loading... </div>
+      <div v-else id="container">
+        <Disk v-for="disk, i in discs.response" :key="i" :details="disk"/>
+      </div>
   </section>
 </template>
 
@@ -15,6 +18,7 @@ export default {
   },
   data(){
       return{
+          loading: true,
           apiUrl: "https://flynn.boolean.careers/exercises/api/array/music",
           discs: {},
       }
@@ -28,6 +32,11 @@ export default {
           .get(this.apiUrl)
           .then((result) => {
               this.discs = result.data;
+              this.loading = false;
+          })
+        //   metodo catch per catturare gli errori
+          .catch((errore) => {
+              console.log("Errore: ", errore);
           })
       }
   },
@@ -36,7 +45,12 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
-.container{
+section{
+    text-align: center;
+    color: #fff;
+    font-size: 4rem;
+}
+#container{
     display: flex;
     flex-wrap: wrap;
 
