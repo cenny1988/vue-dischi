@@ -29,6 +29,7 @@ export default {
     img{
         max-width: 100%;
         padding: 1rem;
+        aspect-ratio: 1;
     }
     h3{
         color: #fff;
