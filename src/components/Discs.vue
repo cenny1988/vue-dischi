@@ -1,11 +1,17 @@
 <template>
   <section>
+      <!-- select component -->
+      <Search @choose="searching"/>
+
+       <!-- loading -->
       <div v-if="loading" id="loading"> 
           <span></span>
           <span></span>
           <span></span>
           <span></span>
       </div>
+
+      <!-- container album -->
       <div v-else id="container">
         <Disk v-for="disk, i in discs.response" :key="i" :details="disk"/>
       </div>
@@ -14,22 +20,38 @@
 
 <script>
 import Disk from '../components/Disk.vue';
+import Search from '../components/Search.vue';
 import axios from 'axios';
 
 export default {
   name: 'Discs',
   components: {
     Disk,
+    Search
   },
   data(){
       return{
           loading: true,
           apiUrl: "https://flynn.boolean.careers/exercises/api/array/music",
           discs: {},
+          chooseUser: '',
+          filteredDiscs: {},
       }
   },
   created() {
       this.getDiscs();
+    //   this.filteredDiscs = this.discs;
+  },
+  computed: {
+      getFilteredDiscs(){
+          if(this.chooseUser === ''){
+              return this.discs;
+          }
+
+          return this.discs.filter((item) => {
+              return item.genre.includes(this.chooseUser);
+          })
+      }
   },
   methods: {
       getDiscs(){
@@ -43,6 +65,10 @@ export default {
           .catch((errore) => {
               console.log("Errore: ", errore);
           })
+      },
+      searching(valChoose){
+          this.chooseUser = valChoose;
+          console.log(valChoose);
       }
   },
 }
