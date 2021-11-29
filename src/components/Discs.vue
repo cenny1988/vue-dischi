@@ -13,7 +13,7 @@
 
       <!-- container album -->
       <div v-else id="container">
-        <Disk v-for="disk, i in discs.response" :key="i" :details="disk"/>
+        <Disk v-for="disk, i in getFilteredDiscs.response" :key="i" :details="disk"/>
       </div>
   </section>
 </template>
@@ -35,7 +35,7 @@ export default {
           apiUrl: "https://flynn.boolean.careers/exercises/api/array/music",
           discs: {},
           chooseUser: '',
-          filteredDiscs: {},
+        //   filteredDiscs: {},
       }
   },
   created() {
@@ -48,7 +48,7 @@ export default {
               return this.discs;
           }
 
-          return this.discs.filter((item) => {
+          return this.discs.response.filter( (item) => {
               return item.genre.includes(this.chooseUser);
           })
       }

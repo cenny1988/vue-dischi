@@ -16,14 +16,14 @@ export default {
   name: 'Search',
   data(){
       return{
-          selectedOption: null,
+          selectedOption: '',
       }
   },
   methods: {
       selectOption(event) {
           this.selectedOption = event.target.value;
-          console.log(this.selectedOption);
-          return "$emit('choose', this.selectedOption)"
+        //   console.log(this.selectedOption);
+          this.$emit('choose', this.selectedOption);
       }
   }
 }
@@ -31,5 +31,14 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
-
+    section{
+        width: 100%;
+        color: #fff;
+        font-size: 1.5rem;
+        padding-top: 2rem;
+        text-align: center;
+        #discs{
+            padding: 0 1rem;
+        }
+    }
 </style>
