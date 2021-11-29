@@ -17,13 +17,12 @@ export default {
   name: 'Search',
   data(){
       return{
-          selectedOption: '',
+          selectedOption: null,
       }
   },
   methods: {
       selectOption(event) {
           this.selectedOption = event.target.value;
-        //   console.log(this.selectedOption);
           this.$emit('choose', this.selectedOption);
       }
   }

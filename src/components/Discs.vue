@@ -42,7 +42,7 @@ export default {
   },
   computed: {
       filteredDiscs(){
-          if(this.chooseUser === '' || this.chooseUser === 'All'){
+          if(this.chooseUser === null || this.chooseUser === 'All'){
               return this.discs;
           }
           return this.discs.filter((item) => {
@@ -65,7 +65,6 @@ export default {
       },
       searching(valChoose){
           this.chooseUser = valChoose;
-          console.log(valChoose);
       }
   },
 }
