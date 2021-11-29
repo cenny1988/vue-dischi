@@ -3,6 +3,7 @@
             <label for="discs">Filtra Albums per genere:</label>
             <select name="discs" id="discs" @change="selectOption">
                 <option selected disabled>Seleziona un'opzione</option>
+                <option value="All">All</option>
                 <option value="Rock">Rock</option>
                 <option value="Pop">Pop</option>
                 <option value="Jazz">Jazz</option>
@@ -38,7 +39,7 @@ export default {
         padding-top: 2rem;
         text-align: center;
         #discs{
-            padding: 0 1rem;
+            padding: 5px 1rem;
         }
     }
 </style>

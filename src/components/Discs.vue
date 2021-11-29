@@ -13,7 +13,7 @@
 
       <!-- container album -->
       <div v-else id="container">
-        <Disk v-for="disk, i in getFilteredDiscs.response" :key="i" :details="disk"/>
+        <Disk v-for="disk, i in filteredDiscs" :key="i" :details="disk"/>
       </div>
   </section>
 </template>
@@ -33,24 +33,21 @@ export default {
       return{
           loading: true,
           apiUrl: "https://flynn.boolean.careers/exercises/api/array/music",
-          discs: {},
+          discs: [],
           chooseUser: '',
-        //   filteredDiscs: {},
       }
   },
   created() {
       this.getDiscs();
-    //   this.filteredDiscs = this.discs;
   },
   computed: {
-      getFilteredDiscs(){
-          if(this.chooseUser === ''){
+      filteredDiscs(){
+          if(this.chooseUser === '' || this.chooseUser === 'All'){
               return this.discs;
           }
-
-          return this.discs.response.filter( (item) => {
+          return this.discs.filter((item) => {
               return item.genre.includes(this.chooseUser);
-          })
+          });
       }
   },
   methods: {
@@ -58,7 +55,7 @@ export default {
           axios
           .get(this.apiUrl)
           .then((result) => {
-              this.discs = result.data;
+              this.discs = result.data.response;
               this.loading = false;
           })
         //   metodo catch per catturare gli errori
