@@ -1,14 +1,17 @@
 <template>
       <section>
-            <label for="discs"> Filtra Albums per genere:</label>
-            <select name="discs" id="discs" @change="selectOption">
+            <!-- <label for="discs"> Filtra Albums per genere:</label> -->
+            <select id="discs" @change="selectOption">
                 <option selected disabled>Seleziona un'opzione</option>
                 <option value="All">All</option>
-                <!-- <option value="Rock">Rock</option>
-                <option value="Pop">Pop</option>
-                <option value="Jazz">Jazz</option>
-                <option value="Metal">Metal</option> -->
-                <option v-for="option,i in options" :key="i" :value="option">{{option}}</option>
+                <option 
+                    v-for="option,i in options" 
+                    :key="i" 
+                    :value="option"
+                >
+                    
+                    {{option}}
+                </option>
         </select>
       </section>
 </template>

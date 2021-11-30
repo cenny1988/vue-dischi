@@ -40,7 +40,6 @@ export default {
   },
   created() {
       this.getDiscs();
-      this.getGenre();
   },
   computed: {
       filteredDiscs(){
@@ -59,20 +58,17 @@ export default {
           .then((result) => {
               this.discs = result.data.response;
               this.loading = false;
+
+            //   genero l array con i generi non duplicati
+            this.discs.forEach(element => {
+                if(!this.genre.includes(element.genre)){
+                    this.genre.push(element.genre)
+                }
+            });
           })
         //   metodo catch per catturare gli errori
           .catch((errore) => {
               console.log("Errore: ", errore);
-          })
-      },
-      getGenre(){
-          axios
-          .get(this.apiUrl)
-          .then((result) => {
-              result.data.response.forEach(element => {
-                  this.genre.includes(element.genre) ? '' : this.genre.push(element.genre);
-              });
-            console.log(this.genre);
           })
       },
       searching(valChoose){
