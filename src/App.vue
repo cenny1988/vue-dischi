@@ -25,11 +25,12 @@ export default {
   methods: {
     getGenre(listsGenre){
       this.genersAlbums = listsGenre;
-      // console.log(this.genersAlbums);
+      console.log(this.genersAlbums);
     },
     getChoose(genreChoose){
+      console.log('log di genreChoose: ', genreChoose);
       this.selChoose = genreChoose;
-      console.log('log di selCoose: ',this.selChoose);
+      console.log('log di selCoose: ', this.selChoose);
     }
   },
 }
@@ -40,8 +41,5 @@ export default {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-}
-#app {
-
 }
 </style>
