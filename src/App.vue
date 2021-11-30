@@ -25,12 +25,9 @@ export default {
   methods: {
     getGenre(listsGenre){
       this.genersAlbums = listsGenre;
-      // console.log(this.genersAlbums);
     },
     getChoose(genreChoose){
-      // console.log('log di genreChoose: ', genreChoose);
       this.selChoose = genreChoose;
-      // console.log('log di selCoose: ', this.selChoose);
     }
   },
 }

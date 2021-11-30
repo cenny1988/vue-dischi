@@ -1,7 +1,7 @@
 <template>
       <section>
-            <!-- <label for="discs"> Filtra Albums per genere:</label> -->
-            <select id="discs" @change="selectOption">
+            <label for="discs"> Filtra Albums per genere:</label>
+            <select id="discs" @change="$emit('choose', $event.target.value)">
                 <option selected disabled>Seleziona un'opzione</option>
                 <option value="All">All</option>
                 <option 
@@ -29,10 +29,11 @@ export default {
     
   },
   methods: {
-      selectOption(event) {
-          this.selectedOption = event.target.value;
-          this.$emit('choose', this.selectedOption);
-      },
+    //   se utilizzo qst il seguente metodo --> rig4: @change="selectOption"
+    //   selectOption(event) {
+    //       this.selectedOption = event.target.value;
+    //       this.$emit('choose', this.selectedOption);
+    //   },
   },
 }
 </script>
@@ -48,6 +49,7 @@ export default {
         margin: 0 2rem;
         #discs{
             padding: 5px 1rem;
+            border-radius: 10px;
         }
     }
 </style>

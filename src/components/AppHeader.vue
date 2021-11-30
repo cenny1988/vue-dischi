@@ -5,7 +5,7 @@
       </div>
 
       <!-- select component -->
-      <Search :childToParent="$emit('changeGen', chooseUser)" @choose="searching" :options="listGenres"/>
+      <Search  @choose="searching" :options="listGenres"/>
   </header>
 </template>
 
@@ -27,8 +27,12 @@ export default {
   },
   methods: {
       searching(valChoose){
+          //   salvo il valore ricevuto dal child (ovvero Search),
           this.chooseUser = valChoose;
-        //   console.log('log di chooseUser: ',this.chooseUser, 'log di valChoose: ',valChoose );
+        //   ... e lo invio con $emit al parent
+          this.$emit('changeGen',this.chooseUser)
+        // in alternativa posso cancellare riga 33, e a riga 8 posso aggiungere
+        // :childToParent="$emit('changeGen', chooseUser)"
       }
   },
 }
