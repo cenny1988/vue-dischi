@@ -1,7 +1,7 @@
 <template>
   <section>
       <!-- select component -->
-      <Search @choose="searching"/>
+      <Search @choose="searching" :options="genre"/>
 
        <!-- loading -->
       <div v-if="loading" id="loading"> 
@@ -34,11 +34,13 @@ export default {
           loading: true,
           apiUrl: "https://flynn.boolean.careers/exercises/api/array/music",
           discs: [],
+          genre: [],
           chooseUser: '',
       }
   },
   created() {
       this.getDiscs();
+      this.getGenre();
   },
   computed: {
       filteredDiscs(){
@@ -61,6 +63,16 @@ export default {
         //   metodo catch per catturare gli errori
           .catch((errore) => {
               console.log("Errore: ", errore);
+          })
+      },
+      getGenre(){
+          axios
+          .get(this.apiUrl)
+          .then((result) => {
+              result.data.response.forEach(element => {
+                  this.genre.includes(element.genre) ? '' : this.genre.push(element.genre);
+              });
+            console.log(this.genre);
           })
       },
       searching(valChoose){
