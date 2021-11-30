@@ -33,18 +33,19 @@ export default {
           this.selectedOption = event.target.value;
           this.$emit('choose', this.selectedOption);
       },
-  }
+  },
 }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
     section{
-        width: 100%;
+        // width: 100%;
         color: #fff;
         font-size: 1.5rem;
         padding-top: 2rem;
         text-align: center;
+        margin: 0 2rem;
         #discs{
             padding: 5px 1rem;
         }

@@ -1,8 +1,5 @@
 <template>
   <section>
-      <!-- select component -->
-      <Search @choose="searching" :options="genre"/>
-
        <!-- loading -->
       <div v-if="loading" id="loading"> 
           <span></span>
@@ -13,21 +10,25 @@
 
       <!-- container album -->
       <div v-else id="container">
-        <Disk v-for="disk, i in filteredDiscs" :key="i" :details="disk"/>
+            <Disk v-for="disk, i in filteredDiscs" 
+            :key="i" 
+            :details="disk"
+        />
       </div>
   </section>
 </template>
 
 <script>
 import Disk from '../components/Disk.vue';
-import Search from '../components/Search.vue';
 import axios from 'axios';
 
 export default {
   name: 'Discs',
   components: {
     Disk,
-    Search
+  },
+  props:{
+      selectGen: String,
   },
   data(){
       return{
@@ -35,7 +36,7 @@ export default {
           apiUrl: "https://flynn.boolean.careers/exercises/api/array/music",
           discs: [],
           genre: [],
-          chooseUser: '',
+          
       }
   },
   created() {
@@ -43,11 +44,11 @@ export default {
   },
   computed: {
       filteredDiscs(){
-          if(this.chooseUser === null || this.chooseUser === 'All'){
+          if(this.selectGen === '' || this.selectGen === 'All'){
               return this.discs;
           }
           return this.discs.filter((item) => {
-              return item.genre.includes(this.chooseUser);
+              return item.genre.includes(this.selectGen);
           });
       }
   },
@@ -65,21 +66,25 @@ export default {
                     this.genre.push(element.genre)
                 }
             });
+
+            // passo i dati del array genre dal figlio discs al padre app
+            this.$emit('loadGenre', this.genre)
           })
         //   metodo catch per catturare gli errori
           .catch((errore) => {
               console.log("Errore: ", errore);
           })
       },
-      searching(valChoose){
-          this.chooseUser = valChoose;
-      }
   },
 }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
+section{
+    background-color: #1e2d3b;
+    min-height: calc(100vh - 100px);
+  }
 #loading{
     text-align: center;
     padding-top: 4rem;

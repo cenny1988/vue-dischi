@@ -1,9 +1,8 @@
 <template>
   <div id="app">
-    <AppHeader/>
-    <main>
-      <Discs/>
-    </main>
+    <AppHeader @changeGen="getChoose" :listGenres="genersAlbums"/>
+   
+    <Discs @loadGenre="getGenre" :selectGen="selChoose" />
   </div>
 </template>
 
@@ -16,7 +15,23 @@ export default {
   components: {
     AppHeader,
     Discs,
-  }
+  },
+  data(){
+      return{
+          genersAlbums: [],
+          selChoose: '',
+      }
+  },
+  methods: {
+    getGenre(listsGenre){
+      this.genersAlbums = listsGenre;
+      // console.log(this.genersAlbums);
+    },
+    getChoose(genreChoose){
+      this.selChoose = genreChoose;
+      console.log('log di selCoose: ',this.selChoose);
+    }
+  },
 }
 </script>
 
@@ -27,10 +42,6 @@ export default {
   box-sizing: border-box;
 }
 #app {
-  main{
-    background-color: #1e2d3b;
-    min-height: calc(100vh - 100px);
-  }
-  
+
 }
 </style>
