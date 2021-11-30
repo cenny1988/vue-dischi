@@ -5,7 +5,7 @@
       </div>
 
       <!-- select component -->
-      <Search @change.capture="$emit('changeGen', chooseUser)" @choose="searching" :options="listGenres"/>
+      <Search :childToParent="$emit('changeGen', chooseUser)" @choose="searching" :options="listGenres"/>
   </header>
 </template>
 
@@ -28,7 +28,7 @@ export default {
   methods: {
       searching(valChoose){
           this.chooseUser = valChoose;
-          console.log('log di chooseUser: ',this.chooseUser, 'log di valChoose: ',valChoose );
+        //   console.log('log di chooseUser: ',this.chooseUser, 'log di valChoose: ',valChoose );
       }
   },
 }
